@@ -3,14 +3,18 @@
 
 #include "stdafx.h"
 
-#include "testMat.hpp"
+#include "TestMat.hpp"
+#include "TestImage.hpp"
+#include "TestTransform.hpp"
 
 
 int main()
 {
-	TEST_MAT();
+	//TEST_MAT();
+	//TEST_IMAGE();
 
-	system("pause");
+	TEST_PERSPECTIVE_TRANSFORM();
+
     return 0;
 }
 
