@@ -9,8 +9,8 @@
 
 #include <stdio.h>
 #include <tchar.h>
-
-
+#include <iostream>
+using namespace std;
 
 // TODO:  在此处引用程序需要的其他头文件
 
@@ -21,10 +21,10 @@ using namespace cv;
 #ifdef _DEBUG
 #pragma comment(lib, "opencv_core340d.lib")
 #pragma comment(lib, "opencv_highgui340d.lib")
-#pragma comment(lib,"opencv_imgproc340d.lib")      
+#pragma comment(lib, "opencv_imgproc340d.lib")      
 
 #else
 #pragma comment(lib, "opencv_core340.lib")
 #pragma comment(lib, "opencv_highgui340.lib")
-#pragma comment(lib,"opencv_imgproc340.lib")
+#pragma comment(lib, "opencv_imgproc340.lib")
 #endif
