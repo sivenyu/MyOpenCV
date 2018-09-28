@@ -22,9 +22,10 @@ using namespace cv;
 #pragma comment(lib, "opencv_core340d.lib")
 #pragma comment(lib, "opencv_highgui340d.lib")
 #pragma comment(lib, "opencv_imgproc340d.lib")      
-
+#pragma comment(lib, "opencv_imgcodecs340d.lib")
 #else
 #pragma comment(lib, "opencv_core340.lib")
 #pragma comment(lib, "opencv_highgui340.lib")
 #pragma comment(lib, "opencv_imgproc340.lib")
+#pragma comment(lib, "opencv_imgcodecs340.lib")
 #endif

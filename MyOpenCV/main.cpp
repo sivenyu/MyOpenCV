@@ -7,6 +7,8 @@
 #include "TestImage.hpp"
 #include "TestTransform.hpp"
 #include "TestPerspective.hpp"
+#include "TestPerspective2.hpp"
+#include "TestAngle.hpp"
 
 int main()
 {
@@ -14,9 +16,11 @@ int main()
 	//TEST_IMAGE();
 
 	//TEST_PERSPECTIVE_TRANSFORM();
+	//TEST_ANGLE();
 
-	MY_TRANSFORM();
 	//MY_PERSPECTIVE_TRANSFORM();
+	//MY_TRANSFORM();
+	MY_PERSPECTIVE2();
 
     return 0;
 }

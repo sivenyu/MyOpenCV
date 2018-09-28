@@ -2,7 +2,7 @@
 #include "stdafx.h"
 
 
-#pragma comment(lib, "opencv_imgcodecs340d.lib")
+
 
 
 void TEST_MAT()

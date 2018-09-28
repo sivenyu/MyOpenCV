@@ -49,6 +49,9 @@ void sortCorners(std::vector<cv::Point2f>& corners, cv::Point2f center)
 }
 
 
+
+
+
 void TEST_PERSPECTIVE_TRANSFORM()
 {
 	// 载入图像→灰度化→边缘处理得到边缘图像
@@ -134,8 +137,19 @@ void TEST_PERSPECTIVE_TRANSFORM()
 	quad_pts.push_back(cv::Point2f(quad.cols, quad.rows));
 	quad_pts.push_back(cv::Point2f(0, quad.rows));
 
+	cout << "原始点:" << endl;
+	cout << corners << endl << endl;
+
+	cout << "目的点:" << endl;
+	cout << quad_pts << endl << endl;
+
+
 	// 计算映射矩阵
 	cv::Mat transmtx = cv::getPerspectiveTransform(corners, quad_pts);
+	cout << "变换矩阵:" << endl;
+	cout << transmtx << endl << endl;
+
+
 	// 进行透视变换
 	cv::warpPerspective(src, quad, transmtx, quad.size());
 
