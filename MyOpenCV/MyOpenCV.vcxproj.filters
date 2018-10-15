@@ -13,8 +13,11 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="资源文件\bmp">
-      <UniqueIdentifier>{02f7890a-ce2d-4d01-bdaf-e16d32074408}</UniqueIdentifier>
+    <Filter Include="基本应用">
+      <UniqueIdentifier>{beb71dae-7949-4c77-b68b-f0a351da7097}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="变换算法">
+      <UniqueIdentifier>{a43e6213-e6bd-4c0a-868e-753d00021801}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
@@ -27,26 +30,23 @@
     <ClInclude Include="targetver.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="TestImage.hpp">
-      <Filter>源文件</Filter>
-    </ClInclude>
-    <ClInclude Include="TestMat.hpp">
-      <Filter>源文件</Filter>
-    </ClInclude>
-    <ClInclude Include="TestTransform.hpp">
-      <Filter>源文件</Filter>
-    </ClInclude>
-    <ClInclude Include="TestPerspective.hpp">
-      <Filter>源文件</Filter>
-    </ClInclude>
-    <ClInclude Include="TestAngle.hpp">
-      <Filter>源文件</Filter>
-    </ClInclude>
     <ClInclude Include="Utils.h">
       <Filter>头文件</Filter>
     </ClInclude>
-    <ClInclude Include="TestPerspective2.hpp">
-      <Filter>源文件</Filter>
+    <ClInclude Include="TestAngle.hpp">
+      <Filter>基本应用</Filter>
+    </ClInclude>
+    <ClInclude Include="TestImage.hpp">
+      <Filter>基本应用</Filter>
+    </ClInclude>
+    <ClInclude Include="TestMat.hpp">
+      <Filter>基本应用</Filter>
+    </ClInclude>
+    <ClInclude Include="TestMyPerspective.hpp">
+      <Filter>变换算法</Filter>
+    </ClInclude>
+    <ClInclude Include="TestPerspective.hpp">
+      <Filter>变换算法</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -58,8 +58,17 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <Image Include="bmp\1.bmp">
-      <Filter>资源文件\bmp</Filter>
+    <Image Include="Image\mark1.bmp">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="Image\mark2.bmp">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="Image\plate.jpg">
+      <Filter>资源文件</Filter>
+    </Image>
+    <Image Include="Image\poker.jpg">
+      <Filter>资源文件</Filter>
     </Image>
   </ItemGroup>
 </Project>

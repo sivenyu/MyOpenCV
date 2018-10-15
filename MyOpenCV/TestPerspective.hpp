@@ -1,118 +1,160 @@
 #pragma once
 
 #include "stdafx.h"
+       
 
-#define DPI						(1200) // 分辨率
-//#define MM_TO_PIXELS(mm)		((int)(((mm) * (DPI)) / 25.4))
-#define MM_TO_PIXELS(mm)		(mm)
+cv::Point2f center(0, 0);
 
-#define MM_TO_INCH(mm)			((mm) / 25.4)
-#define INCH_TO_MM(inch)		((inch) * 25.4)
-#define INCH_TO_PIXELS(inch)	((inch) * (DPI))
-
-
-void MY_PERSPECTIVE_TRANSFORM()
+cv::Point2f computeIntersect(cv::Vec4i a, cv::Vec4i b)
 {
-	// 载入图像(1200*1200)
-	cv::Mat srcImg = cv::imread("D:\\work\\000002\\preview.bmp");
-	if (srcImg.empty())
-		return;
+	int x1 = a[0], y1 = a[1], x2 = a[2], y2 = a[3], x3 = b[0], y3 = b[1], x4 = b[2], y4 = b[3];
+	float denom;
 
-	// 四个理论靶标点坐标
-	std::vector<cv::Point2f> marks;
-	marks.push_back(cv::Point2f(INCH_TO_PIXELS(15.6), INCH_TO_PIXELS(0.37)));
-	marks.push_back(cv::Point2f(INCH_TO_PIXELS(14.6), INCH_TO_PIXELS(13.6)));
-	marks.push_back(cv::Point2f(INCH_TO_PIXELS(0.42), INCH_TO_PIXELS(13.6)));
-	marks.push_back(cv::Point2f(INCH_TO_PIXELS(0.42), INCH_TO_PIXELS(0.37)));
-	cout << "图纸理论坐标：" << endl;
-	cout << marks << endl;
+	if (float d = ((float)(x1 - x2) * (y3 - y4)) - ((y1 - y2) * (x3 - x4)))
+	{
+		cv::Point2f pt;
+		pt.x = ((x1 * y2 - y1 * x2) * (x3 - x4) - (x1 - x2) * (x3 * y4 - y3 * x4)) / d;
+		pt.y = ((x1 * y2 - y1 * x2) * (y3 - y4) - (y1 - y2) * (x3 * y4 - y3 * x4)) / d;
+		return pt;
+	}
+	else
+		return cv::Point2f(-1, -1);
+}
 
-	// 设定目的靶标点坐标
-	std::vector<cv::Point2f> msr_marks;
-	msr_marks.push_back(cv::Point2f(INCH_TO_PIXELS(15.6), INCH_TO_PIXELS(0.37))); //给定偏差
-	msr_marks.push_back(cv::Point2f(INCH_TO_PIXELS(14.6-0.1), INCH_TO_PIXELS(13.6+0.2)));
-	msr_marks.push_back(cv::Point2f(INCH_TO_PIXELS(0.42), INCH_TO_PIXELS(13.6)));
-	msr_marks.push_back(cv::Point2f(INCH_TO_PIXELS(0.42+0.1), INCH_TO_PIXELS(0.37-0.2)));
-	cout << "图纸实测坐标：" << endl;
-	cout << msr_marks << endl;
+void sortCorners(std::vector<cv::Point2f>& corners, cv::Point2f center)
+{
+	std::vector<cv::Point2f> top, bot;
 
-	// 计算映射矩阵
-	cv::Mat transmtx = cv::getPerspectiveTransform(marks, msr_marks);
-	cout << "变换矩阵:" << endl;
-	cout << transmtx << endl << endl;
+	for (int i = 0; i < corners.size(); i++)
+	{
+		if (corners[i].y < center.y)
+			top.push_back(corners[i]);
+		else
+			bot.push_back(corners[i]);
+	}
+	corners.clear();
 
-	// 初始化目的图像
-	Mat dstImg = Mat::zeros(srcImg.size(), srcImg.type());
-	//cv::Mat dstImg = cv::Mat::zeros(19200, 16800, CV_8UC1);  //原图大小会抛异常
-	//cv::Mat dstImg = cv::Mat::zeros(8000, 7000, CV_8UC1);
+	if (top.size() == 2 && bot.size() == 2)
+	{
+		cv::Point2f tl = top[0].x > top[1].x ? top[1] : top[0];
+		cv::Point2f tr = top[0].x > top[1].x ? top[0] : top[1];
+		cv::Point2f bl = bot[0].x > bot[1].x ? bot[1] : bot[0];
+		cv::Point2f br = bot[0].x > bot[1].x ? bot[0] : bot[1];
 
-	// 进行透视变换
-	cv::warpPerspective(srcImg, dstImg, transmtx, dstImg.size());
-
-	// 显示结果
-	cv::imshow("image", dstImg);
-	// 保存结果
-	imwrite("D:\\work\\000002\\out.bmp", dstImg);
-	cv::waitKey();
+		corners.push_back(tl);
+		corners.push_back(tr);
+		corners.push_back(br);
+		corners.push_back(bl);
+	}
 }
 
 
 
-void MY_TRANSFORM()
-{
-	std::vector<cv::Point2f> std_pts; // 玻璃尺理论数据
-	std_pts.push_back(cv::Point2f(MM_TO_PIXELS(30.1785), MM_TO_PIXELS(134.027))); //右下
-	std_pts.push_back(cv::Point2f(MM_TO_PIXELS(766.7785), MM_TO_PIXELS(134.027))); //左下
-	std_pts.push_back(cv::Point2f(MM_TO_PIXELS(30.1785), MM_TO_PIXELS(718.227))); //右上
-	std_pts.push_back(cv::Point2f(MM_TO_PIXELS(766.7785), MM_TO_PIXELS(718.227))); //左上
-	cout << "玻璃尺理论坐标：" << endl;
-	cout << std_pts << endl;
 
-	std::vector<cv::Point2f> msr_pts; // 玻璃尺运动系统的测量数据
-	msr_pts.push_back(cv::Point2f(MM_TO_PIXELS(30.1785), MM_TO_PIXELS(134.027))); //右下
-	msr_pts.push_back(cv::Point2f(MM_TO_PIXELS(766.7465), MM_TO_PIXELS(134.307))); //左下
-	msr_pts.push_back(cv::Point2f(MM_TO_PIXELS(30.2765), MM_TO_PIXELS(718.217))); //右上
-	msr_pts.push_back(cv::Point2f(MM_TO_PIXELS(766.8495), MM_TO_PIXELS(718.493))); //左上
-	cout << "玻璃尺测量坐标：" << endl;
-	cout << msr_pts << endl;
+
+void TEST_PERSPECTIVE_TRANSFORM()
+{
+	// 载入图像→灰度化→边缘处理得到边缘图像
+	cv::Mat src = cv::imread("Image/poker.jpg");
+	if (src.empty())
+		return;
+
+	cv::Mat bw;
+	cv::cvtColor(src, bw, CV_BGR2GRAY);
+	cv::blur(bw, bw, cv::Size(3, 3));
+	cv::Canny(bw, bw, 100, 100, 3);
+
+	// 霍夫变换进行直线检测
+	std::vector<cv::Vec4i> lines;
+	cv::HoughLinesP(bw, lines, 1, CV_PI / 180, 70, 30, 10);
+
+	// Expand the lines  
+	for (int i = 0; i < lines.size(); i++)
+	{
+		cv::Vec4i v = lines[i];
+		lines[i][0] = 0;
+		lines[i][1] = ((float)v[1] - v[3]) / (v[0] - v[2]) * -v[0] + v[1];
+		lines[i][2] = src.cols;
+		lines[i][3] = ((float)v[1] - v[3]) / (v[0] - v[2]) * (src.cols - v[2]) + v[3];
+	}
+
+	// 求出四个顶点的坐标
+	std::vector<cv::Point2f> corners;
+	for (int i = 0; i < lines.size(); i++)
+	{
+		for (int j = i + 1; j < lines.size(); j++)
+		{
+			cv::Point2f pt = computeIntersect(lines[i], lines[j]);
+			if (pt.x >= 0 && pt.y >= 0)
+				corners.push_back(pt);
+		}
+	}
+
+	// 检查是不是四边形
+	std::vector<cv::Point2f> approx;
+	cv::approxPolyDP(cv::Mat(corners), approx, cv::arcLength(cv::Mat(corners), true) * 0.02, true);
+	if (approx.size() != 4)
+	{
+		std::cout << "The object is not quadrilateral!" << std::endl;
+		return;
+	}
+
+	// 获得中心点坐标
+	for (int i = 0; i < corners.size(); i++)
+		center += corners[i];
+	center *= (1. / corners.size());
+
+	sortCorners(corners, center);
+	if (corners.size() == 0) {
+		std::cout << "The corners were not sorted correctly!" << std::endl;
+		return;
+	}
+	cv::Mat dst = src.clone();
+
+	// Draw lines  
+	for (int i = 0; i < lines.size(); i++)
+	{
+		cv::Vec4i v = lines[i];
+		cv::line(dst, cv::Point(v[0], v[1]), cv::Point(v[2], v[3]), CV_RGB(0, 255, 0));
+	}
+
+	// Draw corner points  
+	cv::circle(dst, corners[0], 3, CV_RGB(255, 0, 0), 2);
+	cv::circle(dst, corners[1], 3, CV_RGB(0, 255, 0), 2);
+	cv::circle(dst, corners[2], 3, CV_RGB(0, 0, 255), 2);
+	cv::circle(dst, corners[3], 3, CV_RGB(255, 255, 255), 2);
+
+	// Draw mass center  
+	cv::circle(dst, center, 3, CV_RGB(255, 255, 0), 2);
+
+	// 初始化目的图像
+	cv::Mat quad = cv::Mat::zeros(300, 220, CV_8UC3);
+
+	// 获取目的图像的四个顶点
+	std::vector<cv::Point2f> quad_pts;
+	quad_pts.push_back(cv::Point2f(0, 0));
+	quad_pts.push_back(cv::Point2f(quad.cols, 0));
+	quad_pts.push_back(cv::Point2f(quad.cols, quad.rows));
+	quad_pts.push_back(cv::Point2f(0, quad.rows));
+
+	cout << "原始点:" << endl;
+	cout << corners << endl << endl;
+
+	cout << "目的点:" << endl;
+	cout << quad_pts << endl << endl;
+
 
 	// 计算映射矩阵
-	cv::Mat transmtx = cv::getPerspectiveTransform(msr_pts, std_pts);
-
+	cv::Mat transmtx = cv::getPerspectiveTransform(corners, quad_pts);
 	cout << "变换矩阵:" << endl;
 	cout << transmtx << endl << endl;
 
 
+	// 进行透视变换
+	cv::warpPerspective(src, quad, transmtx, quad.size());
 
-	// 靶标点测量坐标
-	double mark[4][2] = {
-		{ INCH_TO_MM(2.324223), INCH_TO_MM(3.058959) },		//右下-3
-		{ INCH_TO_MM(19.103443), INCH_TO_MM(2.955259) },		//左下-0
-		{ INCH_TO_MM(2.418523), INCH_TO_MM(19.561306) },	//右上-2
-		{ INCH_TO_MM(19.197343), INCH_TO_MM(19.457905) }	//左上-1
-	};
-	
-	cv::Mat mMsr = cv::Mat(4, 2, CV_64FC1, mark); // 靶标点在运动系统的测量数据
-	//cv::Mat mMsr;
-	//fromVectorToMat(msr_pts, mMsr);
-	cv::Mat mDst = cv::Mat::zeros(Size(2, 4), CV_64FC1); // 靶标点直角坐标系的理论数据
-
-	try
-	{
-		cout << "靶标点测量坐标（X,Y不垂直）:" << endl;
-		cout << cv::format(mMsr, Formatter::FMT_PYTHON) << endl;
-		cout << "=>" << endl;
-
-		// 进行透视变换
-		cv::warpPerspective(mMsr, mDst, transmtx, mDst.size());
-		
-		cout << "靶标点理论坐标（X,Y垂直）:" << endl;
-		cout << cv::format(mDst, Formatter::FMT_PYTHON)<< endl;
-	}
-	catch (Exception ex)
-	{
-		cout << "Any key for exception exit!" << endl;
-	}
-
-	system("pause");
+	// 显示结果
+	cv::imshow("image", dst);
+	cv::imshow("quadrilateral", quad);
+	cv::waitKey();
 }

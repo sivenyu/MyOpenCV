@@ -5,22 +5,23 @@
 
 #include "TestMat.hpp"
 #include "TestImage.hpp"
-#include "TestTransform.hpp"
-#include "TestPerspective.hpp"
-#include "TestPerspective2.hpp"
 #include "TestAngle.hpp"
+
+#include "TestPerspective.hpp"
+#include "TestMyPerspective.hpp"
+
 
 int main()
 {
+	//Basic...
 	//TEST_MAT();
 	//TEST_IMAGE();
-
-	//TEST_PERSPECTIVE_TRANSFORM();
 	//TEST_ANGLE();
 
+	//Transform...
+	TEST_PERSPECTIVE_TRANSFORM();
 	//MY_PERSPECTIVE_TRANSFORM();
-	//MY_TRANSFORM();
-	MY_PERSPECTIVE2();
+
 
     return 0;
 }
