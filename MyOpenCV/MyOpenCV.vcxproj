@@ -172,6 +172,7 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
+    <Image Include="Image\barcode.png" />
     <Image Include="Image\mark1.bmp" />
     <Image Include="Image\mark2.bmp" />
     <Image Include="Image\plate.jpg" />

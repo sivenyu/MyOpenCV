@@ -15,11 +15,11 @@ int main()
 {
 	//Basic...
 	//TEST_MAT();
-	//TEST_IMAGE();
+	TEST_IMAGE();
 	//TEST_ANGLE();
 
 	//Transform...
-	TEST_PERSPECTIVE_TRANSFORM();
+	//TEST_PERSPECTIVE_TRANSFORM();
 	//MY_PERSPECTIVE_TRANSFORM();
 
 
