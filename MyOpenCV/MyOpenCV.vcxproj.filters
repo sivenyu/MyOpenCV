@@ -19,6 +19,9 @@
     <Filter Include="变换算法">
       <UniqueIdentifier>{a43e6213-e6bd-4c0a-868e-753d00021801}</UniqueIdentifier>
     </Filter>
+    <Filter Include="处理算法">
+      <UniqueIdentifier>{678232fc-995d-460a-95b0-4e18a8fd1cbf}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <Text Include="ReadMe.txt" />
@@ -47,6 +50,15 @@
     </ClInclude>
     <ClInclude Include="TestPerspective.hpp">
       <Filter>变换算法</Filter>
+    </ClInclude>
+    <ClInclude Include="TestThreshold.hpp">
+      <Filter>处理算法</Filter>
+    </ClInclude>
+    <ClInclude Include="TestCanny.hpp">
+      <Filter>处理算法</Filter>
+    </ClInclude>
+    <ClInclude Include="TestDilateErode.hpp">
+      <Filter>处理算法</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
