@@ -160,8 +160,11 @@
     <ClInclude Include="TestAngle.hpp" />
     <ClInclude Include="TestCanny.hpp" />
     <ClInclude Include="TestDilateErode.hpp" />
+    <ClInclude Include="TestHoughCircle.hpp" />
+    <ClInclude Include="TestHoughLine.hpp" />
     <ClInclude Include="TestImage.hpp" />
     <ClInclude Include="TestMat.hpp" />
+    <ClInclude Include="TestMatchTemplate.hpp" />
     <ClInclude Include="TestMyPerspective.hpp" />
     <ClInclude Include="TestPerspective.hpp" />
     <ClInclude Include="TestThreshold.hpp" />

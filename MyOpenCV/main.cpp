@@ -13,6 +13,9 @@
 #include "TestThreshold.hpp"
 #include "TestDilateErode.hpp"
 #include "TestCanny.hpp"
+#include "TestHoughLine.hpp"
+#include "TestHoughCircle.hpp"
+#include "TestMatchTemplate.hpp"
 
 int main()
 {
@@ -28,7 +31,10 @@ int main()
 	//
 	//TEST_THRESHOLD();
 	//TEST_DILATION();
-	TEST_CANNY();
+	//TEST_CANNY();
+	//TEST_HOUGH_LINE();
+	//TEST_HOUGH_CIRCLE();
+	TEST_MATCH_TEMPLATE();
 
 	destroyAllWindows();
     return 0;

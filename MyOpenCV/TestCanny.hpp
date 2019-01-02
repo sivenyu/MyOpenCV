@@ -21,7 +21,7 @@ void TEST_CANNY()
 {
 	Mat src;
 	src = imread("Image/cap01.bmp", 0); // ª“∂»Õº‘ÿ»Î
-	if (!src.data)
+	if (src.empty())
 	{
 		cout << "ÕºœÒ¥Úø™ ß∞‹£°" << endl;
 		return;

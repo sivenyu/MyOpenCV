@@ -60,6 +60,15 @@
     <ClInclude Include="TestDilateErode.hpp">
       <Filter>处理算法</Filter>
     </ClInclude>
+    <ClInclude Include="TestHoughLine.hpp">
+      <Filter>处理算法</Filter>
+    </ClInclude>
+    <ClInclude Include="TestHoughCircle.hpp">
+      <Filter>处理算法</Filter>
+    </ClInclude>
+    <ClInclude Include="TestMatchTemplate.hpp">
+      <Filter>处理算法</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
