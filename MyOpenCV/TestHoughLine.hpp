@@ -4,7 +4,7 @@
 void TEST_HOUGH_LINE()
 {
 	Mat src, mid, dst;
-	src = imread("Image/cap01.bmp", IMREAD_GRAYSCALE);
+	src = imread("Image/cap01.jpg", IMREAD_GRAYSCALE);
 	if (src.empty())
 	{
 		cout << "Í¼Ïñ´ò¿ªÊ§°Ü£¡" << endl;

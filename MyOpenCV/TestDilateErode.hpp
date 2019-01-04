@@ -39,7 +39,7 @@ void on_dilation_changed(int value, void* pSrc)
 void TEST_DILATION()
 {
 	Mat src;
-	src = imread("Image/cap01.bmp", 0); // ª“∂»Õº‘ÿ»Î
+	src = imread("Image/cap01.jpg", 0); // ª“∂»Õº‘ÿ»Î
 	if (!src.data)
 	{
 		cout << "ÕºœÒ¥Úø™ ß∞‹£°" << endl;

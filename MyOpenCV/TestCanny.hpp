@@ -20,7 +20,7 @@ void on_canny_threshold_changed(int value, void* pSrc)
 void TEST_CANNY()
 {
 	Mat src;
-	src = imread("Image/cap01.bmp", 0); // ª“∂»Õº‘ÿ»Î
+	src = imread("Image/cap01.jpg", 0); // ª“∂»Õº‘ÿ»Î
 	if (src.empty())
 	{
 		cout << "ÕºœÒ¥Úø™ ß∞‹£°" << endl;

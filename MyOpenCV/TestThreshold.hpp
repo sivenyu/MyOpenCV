@@ -30,7 +30,7 @@ void on_maxvalue_changed(int value, void* pImg)
 void ThresholdUsage2()
 {
 	Mat src, dst;
-	src = imread("Image/cap01.bmp", 0); // ª“∂»Õº‘ÿ»Î
+	src = imread("Image/cap01.jpg", 0); // ª“∂»Õº‘ÿ»Î
 	if (!src.data)
 	{
 		cout << "ÕºœÒ¥Úø™ ß∞‹£°" << endl;
@@ -52,7 +52,7 @@ void ThresholdUsage2()
 void ThresholdUsage3()
 {
 	Mat src, dst;
-	src = imread("Image/cap01.bmp", IMREAD_GRAYSCALE); // ª“∂»Õº‘ÿ»Î
+	src = imread("Image/cap01.jpg", IMREAD_GRAYSCALE); // ª“∂»Õº‘ÿ»Î
 	if (!src.data)
 	{
 		cout << "ÕºœÒ¥Úø™ ß∞‹£°" << endl;
